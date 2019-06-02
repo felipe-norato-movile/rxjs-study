@@ -1,15 +1,20 @@
 // RxJS v6+
-import { take, map, delay, mergeAll, mapTo } from 'rxjs/operators';
 import { interval } from 'rxjs';
+import { map, mergeAll, take } from 'rxjs/operators';
 
-const source1 = interval(500).pipe(
+export const mergeAllSource1 = interval(500).pipe(
   take(2),
   map(i => `source1: ${i}`)
 );
 
-const source2 = interval(500).pipe(
+export const mergeAllSource2 = interval(500).pipe(
   take(2),
   map(i => `source2: ${i}`)
+);
+
+export const mergeAllSource3 = interval(500).pipe(
+  take(2),
+  map(i => `source3: ${i}`)
 );
 
 /*
@@ -18,12 +23,11 @@ const source2 = interval(500).pipe(
   many inner observables to subscribe to at a time.  The rest of the observables are stored
   in a backlog waiting to be subscribe.
 */
-const example = source1
-  .pipe(
-    map(val => source2),
-    mergeAll()
-  )
-  .subscribe(val => console.log(val));
+const example = mergeAllSource1.pipe(
+  map(val => mergeAllSource2),
+  mergeAll()
+);
+// .subscribe(val => console.log(val));
 /*
   The subscription is completed once the operator emits all values.
 */

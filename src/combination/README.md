@@ -103,6 +103,8 @@ source1.pipe(
 source1.pipe(mergeMap(val => source2));
 ```
 
+If is **not** required **source value** to interact to children observables **merge** can be used.
+
 ```ts
 // merge Solution
 merge(source1, source2);
