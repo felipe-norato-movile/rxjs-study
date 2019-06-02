@@ -3,7 +3,7 @@
 ## combineAll
 
 When **source completes** emits value
-At subscription it acts as an **combineLatest** emittings na array of **x source emitted positions** the values emitted from **second source**. So if **source** emits **3 times** subscription will receive arrays of **3 positions**
+At subscription it acts as an **combineLatest** emitting an array of **x source emitted positions** the values emitted from **second source**. So if **source** emits **3 times** subscription will receive arrays of **3 positions**
 
 ```ts
 source1.pipe(
@@ -53,7 +53,7 @@ concat(data, of('This', 'Never', 'Runs'), data2);
 ## concatAll
 
 Collect observables and subscribe to next when previous completes.
-The observer emits value when **previeus completes**
+The observer emits value when **previous completes**
 
 ```ts
 of(obs1, obs2, obs3).pipe(concatAll());
@@ -62,6 +62,8 @@ of(obs1, obs2, obs3).pipe(concatAll());
 ## endWith
 
 Emit given value(s) on completion.
+
+Those values are emitted on **subscription**, different from _finalize_ that only calls as a side effect
 
 ```ts
 source$.pipe(endWith('Goodbye', 'Friend'));

@@ -1,9 +1,9 @@
 import { endWith, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-const source$ = of('Hello', 'Friend');
+export const endWithSource$ = of('Hello', 'Friend');
 
-source$
+endWithSource$
   // emit on completion
   .pipe(
     endWith('Goodbye', 'Friend'),
