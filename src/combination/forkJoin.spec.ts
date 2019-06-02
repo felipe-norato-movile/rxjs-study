@@ -7,7 +7,7 @@ import {
 } from './forkJoin';
 import { testSubscription } from './helper.tests';
 
-describe('EndWith', () => {
+describe('forkJoin', () => {
   let subject: Observable<any>;
   let position: number;
   let expected: any;
