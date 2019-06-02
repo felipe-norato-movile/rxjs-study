@@ -1,27 +1,26 @@
 import { take, map, combineAll, tap } from 'rxjs/operators';
-import { interval } from 'rxjs';
+import { interval, combineLatest } from 'rxjs';
 
-//emit every 1s, take 2
-const source = interval(1000).pipe(
-  tap(it => console.log('Tap: source1: ', it)),
+export const source1combineAll = interval(200).pipe(
+  // tap(it => console.log('Tap: source1: ', it)),
   take(3)
 );
 
-//map each emitted value from source to interval observable that takes 5 values
-const example = source
-  .pipe(
-    map(val =>
-      interval(1000).pipe(
-        tap(it => console.log('Tap: source2: ', it)),
-        take(2),
-        map(i => `Result (${val}): ${i}`)
-      )
-    ),
-    combineAll()
-  )
-  .subscribe(console.log);
+export const source2combineAll = interval(100).pipe(take(2));
+const example = source1combineAll.pipe(
+  map(val =>
+    source2combineAll.pipe(
+      // tap(it => console.log('Tap: source2: ', it)),
+      map(i => `Result (${val}): ${i}`)
+    )
+  ),
+  combineAll()
+);
+// .subscribe(console.log);
 
 // const combined = example.pipe(combineAll());
 // const subscribe = combined.subscribe(val => {
 //   console.log('TCL: val', val);
 // });
+
+// combineLatest(source1combineAll, source2combineAll).subscribe(console.log);

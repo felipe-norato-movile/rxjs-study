@@ -3,6 +3,7 @@
 ## combineAll
 
 When **source completes** emits value
+At subscription it acts as an **combineLatest**
 
 ```ts
 source1.pipe(
