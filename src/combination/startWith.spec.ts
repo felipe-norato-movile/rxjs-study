@@ -2,7 +2,7 @@ import { Observable, timer } from 'rxjs';
 import { startWith, take } from 'rxjs/operators';
 import { testSubscription } from './helper.tests';
 
-describe('Pairwise', () => {
+describe('StartWith', () => {
   let subject: Observable<any>;
   let position: number;
   let expected: any;
