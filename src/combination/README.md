@@ -3,7 +3,7 @@
 ## combineAll
 
 When **source completes** emits value
-At subscription it acts as an **combineLatest**
+At subscription it acts as an **combineLatest** emittings na array of **x source emitted positions** the values emitted from **second source**. So if **source** emits **3 times** subscription will receive arrays of **3 positions**
 
 ```ts
 source1.pipe(
