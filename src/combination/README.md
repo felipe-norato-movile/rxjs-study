@@ -17,8 +17,29 @@ source1.pipe(
 When any observable emits a value, emit the latest value from each.
 Only starts when **all observables emits an value**, we can add an _startWith_ to trigger initially
 
+By **default** it returns an **array** of emitted values.
+
 ```ts
 combineLatest(sourceOne, sourceTwo, sourceThree, sourceFour);
+```
+
+It can receives a **project** function to create an **object**.
+
+```ts
+combineLatest(
+  sourceOne,
+  sourceTwo,
+  sourceThree,
+  sourceFour,
+  (sourceA, sourceB, sourceC, sourceD) => {
+    return {
+      valuea: sourceA,
+      valueb: sourceB,
+      valuec: sourceC,
+      valued: sourceD
+    };
+  }
+);
 ```
 
 ## concat (most used)
