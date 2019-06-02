@@ -1,6 +1,7 @@
 import { Observable, combineLatest } from 'rxjs';
 import { combineAll, map, tap } from 'rxjs/operators';
 import { source1combineAll, source2combineAll } from './combineAll';
+import { testSubscription } from './helper.tests';
 
 describe('CombineAll', () => {
   let subject: Observable<any>;
@@ -23,14 +24,7 @@ describe('CombineAll', () => {
       combineAll()
     );
 
-    subject.pipe(tap(() => position++)).subscribe({
-      next: result => {
-        expect(result).toEqual(expected[position - 1]);
-        if (position === expected.length) {
-          done();
-        }
-      }
-    });
+    testSubscription(subject, position, expected, done);
   });
 
   it('when only source2 returns a value', done => {
@@ -48,14 +42,7 @@ describe('CombineAll', () => {
       combineAll()
     );
 
-    subject.pipe(tap(() => position++)).subscribe({
-      next: result => {
-        expect(result).toEqual(expected[position - 1]);
-        if (position === expected.length) {
-          done();
-        }
-      }
-    });
+    testSubscription(subject, position, expected, done);
   });
 
   it('should have different value from combineLatest', done => {
@@ -71,13 +58,6 @@ describe('CombineAll', () => {
       source2combineAll.pipe(map(i => `source2: ${i}`))
     );
 
-    subject.pipe(tap(() => position++)).subscribe({
-      next: result => {
-        expect(result).toEqual(expected[position - 1]);
-        if (position === expected.length) {
-          done();
-        }
-      }
-    });
+    testSubscription(subject, position, expected, done);
   });
 });

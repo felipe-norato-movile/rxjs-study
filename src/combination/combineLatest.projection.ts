@@ -8,11 +8,11 @@ const timerTwo$ = timer(2000, 4000).pipe(take(5));
 // timerThree emits first value at 3s, then once every 4s
 const timerThree$ = timer(3000, 4000).pipe(take(5));
 
-combineLatest(timerOne$, timerTwo$, timerThree$, projectionFunction())
+combineLatest(timerOne$, timerTwo$, timerThree$, combineLatestProjection())
   .pipe(tap(it => console.log('Tap: : ', it)))
   .subscribe();
 
-function projectionFunction(): (
+export function combineLatestProjection(): (
   v1: number,
   v2: number,
   v3: number
