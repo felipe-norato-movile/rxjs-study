@@ -3,19 +3,20 @@ import { withLatestFrom, map, take, startWith } from 'rxjs/operators';
 import { interval } from 'rxjs';
 
 //emit every 5s
-const source = interval(1000).pipe(
+export const withLatestFromSource1 = interval(100).pipe(
   startWith('source'),
   take(5)
 );
 //emit every 1s
-const secondSource = interval(3000).pipe(
+export const withLatestFromSource2 = interval(300).pipe(
   startWith('secondSource'),
   take(10)
 );
+
 //withLatestFrom slower than source
-const example = secondSource.pipe(
+const example = withLatestFromSource2.pipe(
   //both sources must emit at least 1 value (5s) before emitting
-  withLatestFrom(source),
+  withLatestFrom(withLatestFromSource1),
   map(([first, second]) => {
     return `Source (1s): ${first} Latest From (3s): ${second}`;
   })
@@ -26,4 +27,4 @@ const example = secondSource.pipe(
   "Source (1s): 6 Latest From (5s): 0"
   ...
 */
-const subscribe = example.subscribe(val => console.log(val));
+// const subscribe = example.subscribe(val => console.log(val));
