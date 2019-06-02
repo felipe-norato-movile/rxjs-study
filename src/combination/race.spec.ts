@@ -1,5 +1,5 @@
-import { interval, Observable } from 'rxjs';
-import { pairwise, take } from 'rxjs/operators';
+import { interval, Observable, race } from 'rxjs';
+import { mapTo, take } from 'rxjs/operators';
 import { testSubscription } from './helper.tests';
 
 describe('Pairwise', () => {
@@ -12,11 +12,16 @@ describe('Pairwise', () => {
   });
 
   it('should the past and current value as an array', done => {
-    expected = [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]];
+    expected = ['1s won!'];
 
-    subject = interval(100).pipe(
-      pairwise(),
-      take(5)
+    subject = race(
+      interval(150),
+      interval(100).pipe(
+        mapTo('1s won!'),
+        take(1)
+      ),
+      interval(200),
+      interval(250)
     );
 
     testSubscription(subject, position, expected, done);
