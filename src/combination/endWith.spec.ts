@@ -1,7 +1,7 @@
-import { endWithSource$ } from './endWith';
-import { Observable, concat } from 'rxjs';
-import { testSubscription } from './helper.tests';
+import { Observable } from 'rxjs';
 import { endWith, finalize } from 'rxjs/operators';
+import { endWithSource$ } from './endWith';
+import { testSubscription } from './helper.tests';
 
 describe('EndWith', () => {
   let subject: Observable<any>;
