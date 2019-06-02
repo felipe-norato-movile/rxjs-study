@@ -11,7 +11,7 @@ describe('Pairwise', () => {
     position = 0;
   });
 
-  it('should the past and current value as an array', done => {
+  it('should receives the first complete value', done => {
     expected = ['1s won!'];
 
     subject = race(
